@@ -11,10 +11,11 @@
 
 float Cylinder::intersect(glm::vec3 pos, glm::vec3 dir)
 {
-    glm::vec3 d = pos - center;
-    float a = (dir.x * dir.x) + (dir.z * dir.z);
+	glm::vec3 d = pos - center;
+	float a = (dir.x * dir.x) + (dir.z * dir.z);
     float b = 2 * (dir.x * d.x + dir.z * d.z);
     float c = d.x * d.x + d.z * d.z - (radius * radius);
+    
     float determinant = b * b - 4 * a * c;
 	
     if (determinant < 0.0) {
@@ -63,8 +64,8 @@ float Cylinder::intersect(glm::vec3 pos, glm::vec3 dir)
 */
 glm::vec3 Cylinder::normal(glm::vec3 p)
 {
-    glm::vec3 d = p - center;
+	glm::vec3 d = p - center;
     glm::vec3 n = glm::vec3 (d.x, 0, d.z);
     n = glm::normalize(n);
-    return n;
+	return n;
 }

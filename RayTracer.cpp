@@ -253,11 +253,11 @@ void drawTetrahedron(float x, float y, float z, float length, glm::vec3 color1, 
     glm::vec3 C = glm::vec3(x+length*0.5, y, z + sqrt(3.0f) * 0.5 * length);
     glm::vec3 D = glm::vec3(x+length*0.5, y+sqrt(6.0f)/3.0f * length, z + sqrt(3.0f) * 0.25 * length);
     glm::vec3 E = glm::vec3(x+length/2, y, z);
-    glm::vec3 F = glm::vec3((C.x+D.x)/2, (C.y+D.y)/2, (C.z+D.z)/2);
+    glm::vec3 MID = glm::vec3((C.x+D.x)/2, (C.y+D.y)/2, (C.z+D.z)/2);
 
     Plane *face1 = new Plane(E, B, C, A, color1);
-    Plane *face2 = new Plane(B, D, F, C, color2);
-    Plane *face3 = new Plane(D, A, C, F, color1);
+    Plane *face2 = new Plane(B, D, MID, C, color2);
+    Plane *face3 = new Plane(D, A, C, MID, color1);
     Plane *face4 = new Plane(A, D, B, E, color2);
 
     sceneObjects.push_back(face1);
