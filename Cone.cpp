@@ -64,7 +64,7 @@ float Cone::intersect(glm::vec3 pos, glm::vec3 dir)
 */
 glm::vec3 Cone::normal(glm::vec3 p)
 {
-	glm::vec3 d = p-center;
+    glm::vec3 d = p-center;
     float r = sqrt(d.x * d.x + d.z * d.z);
     glm::vec3 n= glm::vec3 (d.x, r*(radius/height), d.z);
     n=glm::normalize(n);
