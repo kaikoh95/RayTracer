@@ -30,6 +30,7 @@ const float XMAX =  WIDTH * 0.5;
 const float YMIN = -HEIGHT * 0.5;
 const float YMAX =  HEIGHT * 0.5;
 const float ETA = 1.01;
+const int SHEAR = 2;
 
 TextureBMP textureWall;
 TextureBMP textureSphere;
@@ -217,15 +218,15 @@ glm::vec3 antiAliasing(glm::vec3 eye, float pixel_size, float xp, float yp){
 /**
  * Function to draw a Cube and set its color
  */
-void drawCube(float x, float y, float z, float length, float width, float height, glm::vec3 color)
+void drawCube(float x, float y, float z, float length, float width, float height, glm::vec3 color, int shear)
 {
     glm::vec3 A = glm::vec3(x, y, z);
     glm::vec3 B = glm::vec3(x+length, y, z);
-    glm::vec3 C = glm::vec3(x+length, y+height, z);
-    glm::vec3 D = glm::vec3(x, y+height, z);
+    glm::vec3 C = glm::vec3(x+length+shear, y+height, z);
+    glm::vec3 D = glm::vec3(x+shear, y+height, z);
     glm::vec3 E = glm::vec3(x+length, y, z-width);
-    glm::vec3 F = glm::vec3(x+length, y+height, z-width);
-    glm::vec3 G = glm::vec3(x, y+height, z-width);
+    glm::vec3 F = glm::vec3(x+length+shear, y+height, z-width);
+    glm::vec3 G = glm::vec3(x+shear, y+height, z-width);
     glm::vec3 H = glm::vec3(x, y, z-width);
 
     Plane *face1 = new Plane(A, B, C, D, color);
@@ -341,7 +342,7 @@ void initialize()
                 glm::vec3(0,0,0));
 
     Sphere *antarcticaSphere = new Sphere(glm::vec3(-7, 5.0, -70.0), 3, glm::vec3(0, 0, 0));
-    Sphere *largeSphere = new Sphere(glm::vec3(-5.0, -5.0, -105.0), 12.0, glm::vec3(0, 0.5, 0.3));
+    Sphere *largeSphere = new Sphere(glm::vec3(-5.0, -5.0, -105.0), 12.0, glm::vec3(0.2, 0.2, 0.2));
     Sphere *smallSphere = new Sphere(glm::vec3(5, -10.0, -68.0), 3, glm::vec3(0, 0, 0));
 
     Cylinder *cylinder = new Cylinder(glm::vec3(14, -12, -70), 2, 10.0, glm::vec3(1,0,0));
@@ -358,7 +359,7 @@ void initialize()
     sceneObjects.push_back(cone);
 
     drawTetrahedron(-6, -10, -70, 5, glm::vec3(0.8, 0.3, 0.3), glm::vec3(0.5, 0.8, 0.8));
-    drawCube(5, 3, -50, 3, 3, 3, glm::vec3(1, 1, 0));
+    drawCube(5, 0, -50, 3, 3, 3, glm::vec3(1, 1, 0), SHEAR);
 }
 
 int main(int argc, char *argv[]) {
